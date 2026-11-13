@@ -1,0 +1,1713 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl" class="dark">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SELA.GG | مكتبة ألعاب سليم وآسر المشتركة</title>
+    <!-- SEO Meta Tags for Google & Search Engines -->
+    <meta name="description" content="منصة SELA.GG الرسمية لألعاب سليم وآسر - مكتبة ألعاب Steam والنسخ النظيفة للتحميل المباشر وعمل Verify.">
+    <meta name="keywords" content="SELA.GG, صِلة, ألعاب سليم وآسر, ستيم, ميديا فاير, Steam Verify">
+    <meta name="author" content="Saleem & Asser">
+    <!-- Google Search Console Verification Meta Tag Added -->
+    <meta name="google-site-verification" content="Oln26eW1tlbBSMYRqg44szqBwH1OHub3am">
+    <!-- Google Fonts: Cairo & Tajawal -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700;800;900&family=Tajawal:wght@400;500;700&display=swap" rel="stylesheet">
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            darkMode: 'class',
+            theme: {
+                extend: {
+                    fontFamily: {
+                        sans: ['Cairo', 'Tajawal', 'sans-serif'],
+                    },
+                    colors: {
+                        cyber: {
+                            bg: '#0c1017',
+                            card: '#141923',
+                            cardHover: '#1a212e',
+                            cyan: '#0ea5e9',
+                            accent: '#2563eb',
+                            gold: '#f59e0b',
+                            border: '#222b3a'
+                        }
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        body {
+            background-color: #0c1017;
+            color: #f1f5f9;
+            font-family: 'Cairo', sans-serif;
+            overflow-x: hidden;
+        }
+        /* Custom Scrollbar */
+        ::-webkit-scrollbar {
+            width: 8px;
+        }
+        ::-webkit-scrollbar-track {
+            background: #0c1017;
+        }
+        ::-webkit-scrollbar-thumb {
+            background: #222b3a;
+            border-radius: 4px;
+        }
+        ::-webkit-scrollbar-thumb:hover {
+            background: #0ea5e9;
+        }
+        .card-shadow {
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.4);
+        }
+        .featured-gradient {
+            background: linear-gradient(to top, rgba(12, 16, 23, 0.98) 10%, rgba(12, 16, 23, 0.4) 60%, rgba(12, 16, 23, 0.1) 100%);
+        }
+    </style>
+</head>
+<body class="min-h-screen flex flex-col selection:bg-sky-500 selection:text-white">
+
+    <!-- Toast Notification Container -->
+    <div id="toast-container" class="fixed bottom-5 left-5 z-50 flex flex-col gap-2 pointer-events-none"></div>
+
+    <!-- Top Utility Bar -->
+    <div class="bg-[#080b10] border-b border-cyber-border text-xs text-slate-400">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-2 flex flex-wrap items-center justify-between gap-2">
+            <div class="flex items-center gap-4">
+                <span class="text-sky-400 font-bold flex items-center gap-1.5">
+                    <span class="w-2 h-2 rounded-full bg-emerald-400 animate-pulse"></span>
+                    مرحباً بكم في منصة SELA.GG الرسمية (سليم & آسر)
+                </span>
+                <span class="hidden sm:inline text-slate-600">|</span>
+                <button onclick="openGuideModal()" class="hover:text-white transition-colors cursor-pointer">شرح التحميل والـ Verify</button>
+                <span class="hidden sm:inline text-slate-600">|</span>
+                <button onclick="copySteamPath()" class="hover:text-white transition-colors cursor-pointer">نسخ مسار Steam</button>
+            </div>
+            <div class="flex items-center gap-3">
+                <span id="top-stats-badge" class="bg-cyber-card border border-cyber-border px-2.5 py-0.5 rounded text-slate-300 font-semibold">39 لعبة متاحة</span>
+            </div>
+        </div>
+    </div>
+
+    <!-- Main Header & Navigation -->
+    <header class="sticky top-0 z-40 bg-cyber-card/95 backdrop-blur-md border-b border-cyber-border shadow-xl">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-3.5">
+            <div class="flex flex-col lg:flex-row items-center justify-between gap-4">
+                
+                <!-- Brand Logo & Nav Links -->
+                <div class="flex items-center justify-between w-full lg:w-auto gap-6">
+                    <a href="#" onclick="resetFilters(); return false;" class="flex items-center gap-3 group">
+                        <div class="w-11 h-11 rounded-xl bg-gradient-to-br from-sky-500 to-blue-700 flex items-center justify-center shadow-lg shadow-sky-500/20 group-hover:scale-105 transition-transform">
+                            <svg class="w-6 h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.2" d="M14.752 11.168l-3.197-2.132A1 1 0 0010 9.87v4.263a1 1 0 001.555.832l3.197-2.132a1 1 0 000-1.664z"></path>
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path>
+                            </svg>
+                        </div>
+                        <div>
+                            <div class="flex items-center gap-2">
+                                <span class="text-2xl font-black tracking-wide text-white" dir="ltr">SELA<span class="text-sky-400">.GG</span></span>
+                                <span class="text-[11px] font-bold px-2 py-0.5 rounded bg-sky-500/20 text-sky-400 border border-sky-500/30">تحميل ألعاب PC</span>
+                            </div>
+                            <p class="text-[11px] text-slate-400">مكتبة سليم وآسر • روابط ميديا فاير مباشرة</p>
+                        </div>
+                    </a>
+
+                    <!-- Mobile Quick Buttons -->
+                    <div class="flex lg:hidden items-center gap-2">
+                        <button onclick="openAddGameModal()" class="px-3 py-2 rounded-lg bg-sky-500 text-white font-bold text-xs shadow">+ إضافة</button>
+                    </div>
+                </div>
+
+                <!-- Classic Category Nav Links (Desktop) -->
+                <nav class="hidden xl:flex items-center gap-1 text-sm font-bold text-slate-300">
+                    <button onclick="setCategory('الكل')" class="nav-link px-3.5 py-2 rounded-lg hover:bg-cyber-bg hover:text-sky-400 transition-colors cursor-pointer">الرئيسية</button>
+                    <button onclick="setCategory('أكشن وقتال')" class="nav-link px-3.5 py-2 rounded-lg hover:bg-cyber-bg hover:text-sky-400 transition-colors cursor-pointer">ألعاب أكشن</button>
+                    <button onclick="setCategory('سباقات')" class="nav-link px-3.5 py-2 rounded-lg hover:bg-cyber-bg hover:text-sky-400 transition-colors cursor-pointer">ألعاب سيارات</button>
+                    <button onclick="setCategory('رياضة وتعاوني')" class="nav-link px-3.5 py-2 rounded-lg hover:bg-cyber-bg hover:text-sky-400 transition-colors cursor-pointer">ألعاب رياضية</button>
+                    <button onclick="setCategory('رعب وألغاز')" class="nav-link px-3.5 py-2 rounded-lg hover:bg-cyber-bg hover:text-sky-400 transition-colors cursor-pointer">رعب ومغامرات</button>
+                </nav>
+
+                <!-- Search & Admin Controls -->
+                <div class="flex items-center gap-2.5 w-full lg:w-auto flex-1 max-w-md justify-end">
+                    <div class="relative flex-1">
+                        <input type="text" id="searchInput" oninput="filterGames()" placeholder="ابحث في الموقع عن أي لعبة..." 
+                            class="w-full bg-cyber-bg border border-cyber-border rounded-xl py-2.5 pr-10 pl-4 text-sm text-white placeholder-slate-400 focus:outline-none focus:border-sky-500 transition-colors">
+                        <svg class="w-4 h-4 text-slate-400 absolute right-3.5 top-3" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"></path>
+                        </svg>
+                    </div>
+                    <button onclick="openAddGameModal()" class="hidden lg:flex items-center gap-1.5 px-3.5 py-2.5 rounded-xl bg-sky-500 hover:bg-sky-400 text-white font-bold text-xs transition-all shrink-0 cursor-pointer shadow-md">
+                        <span>+ إضافة لعبة</span>
+                    </button>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <!-- Main Content Container -->
+    <main class="flex-1 max-w-7xl w-full mx-auto px-4 sm:px-6 lg:px-8 py-6">
+
+        <!-- Featured / Pinned Games Showcase (Classic Download Sites Style) -->
+        <section id="featured-section" class="mb-8">
+            <div class="flex items-center justify-between mb-3">
+                <div class="flex items-center gap-2">
+                    <span class="w-1.5 h-6 rounded-full bg-sky-500"></span>
+                    <h2 class="text-lg font-black text-white">ألعاب مميزة ومثبتة</h2>
+                </div>
+                <span class="text-xs text-slate-400">اضغط على أي لعبة لعرض التفاصيل والتحميل</span>
+            </div>
+            <div id="featured-grid" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
+                <!-- Featured cards injected via JS -->
+            </div>
+        </section>
+
+        <!-- Two-Column Layout: Main Content (Right) + Classic Sidebar (Left) -->
+        <div class="grid grid-cols-1 lg:grid-cols-12 gap-6 items-start">
+
+            <!-- MAIN COLUMN: Latest Games Feed OR Full Game Page (8 Columns on Desktop) -->
+            <div class="lg:col-span-8 space-y-5">
+
+                <!-- VIEW 1: Home Games List View -->
+                <div id="home-feed-view" class="space-y-5">
+                    <!-- Filter Bar Header -->
+                    <div class="bg-cyber-card border border-cyber-border rounded-xl p-3.5 flex flex-wrap items-center justify-between gap-3 card-shadow">
+                        <div class="flex items-center gap-2">
+                            <span class="w-1.5 h-6 rounded-full bg-sky-500"></span>
+                            <h1 id="feed-heading" class="text-base sm:text-lg font-black text-white">أحدث الألعاب المضافة للتحميل</h1>
+                        </div>
+
+                        <!-- Mobile/Tablet Category Pills -->
+                        <div class="flex items-center gap-1.5 overflow-x-auto pb-1 sm:pb-0 w-full sm:w-auto" id="category-filters">
+                            <button onclick="setCategory('الكل')" data-cat="الكل" class="cat-btn active px-3 py-1.5 rounded-lg text-xs font-bold bg-sky-500 text-white transition-all cursor-pointer shrink-0">الكل</button>
+                            <button onclick="setCategory('أكشن وقتال')" data-cat="أكشن وقتال" class="cat-btn px-3 py-1.5 rounded-lg text-xs font-bold bg-cyber-bg text-slate-300 hover:text-white border border-cyber-border transition-all cursor-pointer shrink-0">أكشن</button>
+                            <button onclick="setCategory('سباقات')" data-cat="سباقات" class="cat-btn px-3 py-1.5 rounded-lg text-xs font-bold bg-cyber-bg text-slate-300 hover:text-white border border-cyber-border transition-all cursor-pointer shrink-0">سباقات</button>
+                            <button onclick="setCategory('رياضة وتعاوني')" data-cat="رياضة وتعاوني" class="cat-btn px-3 py-1.5 rounded-lg text-xs font-bold bg-cyber-bg text-slate-300 hover:text-white border border-cyber-border transition-all cursor-pointer shrink-0">رياضة وتعاوني</button>
+                            <button onclick="setCategory('رعب وألغاز')" data-cat="رعب وألغاز" class="cat-btn px-3 py-1.5 rounded-lg text-xs font-bold bg-cyber-bg text-slate-300 hover:text-white border border-cyber-border transition-all cursor-pointer shrink-0">رعب وألغاز</button>
+                            <button onclick="setCategory('محاكاة وإندي')" data-cat="محاكاة وإندي" class="cat-btn px-3 py-1.5 rounded-lg text-xs font-bold bg-cyber-bg text-slate-300 hover:text-white border border-cyber-border transition-all cursor-pointer shrink-0">محاكاة</button>
+                        </div>
+                    </div>
+
+                    <!-- Classic Horizontal Post Cards List (Exactly like PC Games Download Blogs) -->
+                    <div id="games-grid" class="space-y-4">
+                        <!-- Horizontal article-style game cards injected via JS -->
+                    </div>
+
+                    <!-- Empty State -->
+                    <div id="empty-state" class="hidden text-center py-14 bg-cyber-card rounded-xl border border-cyber-border">
+                        <h3 class="text-lg font-bold text-white mb-1">لم يتم العثور على ألعاب مطابقة</h3>
+                        <p class="text-xs text-slate-400 mb-4">تأكد من كتابة اسم اللعبة بشكل صحيح أو تصفح كل الأقسام</p>
+                        <button onclick="resetFilters()" class="px-4 py-2 rounded-lg bg-sky-500 text-white font-bold text-xs cursor-pointer">عرض جميع الألعاب</button>
+                    </div>
+                </div>
+
+                <!-- VIEW 2: Full-Screen Game Article & Download Page (Replaces Feed View) -->
+                <article id="full-game-page" class="hidden bg-cyber-card border border-cyber-border rounded-2xl overflow-hidden card-shadow">
+                    <!-- Breadcrumb & Back Bar -->
+                    <div class="bg-[#19202e] px-5 py-3.5 border-b border-cyber-border flex items-center justify-between gap-3">
+                        <div class="flex items-center gap-2 text-xs text-slate-400 truncate">
+                            <button onclick="showHomeFeed()" class="hover:text-sky-400 font-bold cursor-pointer">الرئيسية</button>
+                            <span>/</span>
+                            <span id="fp-breadcrumb-cat" class="text-sky-400">قسم اللعبة</span>
+                            <span>/</span>
+                            <span id="fp-breadcrumb-title" class="text-white font-bold truncate" dir="ltr">Game</span>
+                        </div>
+                        <button onclick="showHomeFeed()" class="px-3.5 py-1.5 rounded-lg bg-cyber-bg hover:bg-slate-800 border border-cyber-border text-white font-bold text-xs flex items-center gap-1.5 shrink-0 cursor-pointer transition-colors">
+                            <span>&rarr;</span>
+                            <span>العودة لقائمة الألعاب</span>
+                        </button>
+                    </div>
+
+                    <!-- Article Header & Big Poster -->
+                    <div class="p-5 sm:p-7 space-y-6">
+                        <div>
+                            <span id="dl-game-genre" class="inline-block px-3 py-1 rounded-md bg-sky-500/20 text-sky-400 border border-sky-500/30 text-xs font-bold mb-2.5">تصنيف اللعبة</span>
+                            <h1 id="dl-game-title" class="text-2xl sm:text-3xl font-black text-white leading-snug">تحميل لعبة ... للكمبيوتر برابط مباشر</h1>
+                        </div>
+
+                        <div class="relative rounded-xl overflow-hidden border border-cyber-border bg-cyber-bg aspect-video max-h-96">
+                            <div id="dl-game-banner" class="w-full h-full"></div>
+                        </div>
+
+                        <!-- Article Description -->
+                        <div class="space-y-3 text-slate-300 text-sm leading-relaxed">
+                            <h2 class="text-lg font-black text-white border-r-4 border-sky-500 pr-3">نبذة عن اللعبة وطريقة التشغيل</h2>
+                            <p id="dl-game-notes">نسخة نظيفة ومحدثة بالكامل.</p>
+                            <p class="text-xs text-slate-400">هذه النسخة مرفوعة مباشرة من مكتبة سليم وآسر (SELA.GG) على سيرفر ميديا فاير السريع، كل ما عليك فعله هو تحميل الملف وفك الضغط ونقله لمسار ألعاب Steam ثم عمل Verify.</p>
+                        </div>
+
+                        <!-- Game Specs Table -->
+                        <div class="bg-cyber-bg border border-cyber-border rounded-xl overflow-hidden text-xs sm:text-sm">
+                            <div class="px-4 py-3 bg-[#19202e] border-b border-cyber-border font-black text-white">
+                                معلومات وبيانات ملف التحميل
+                            </div>
+                            <div class="divide-y divide-cyber-border/70">
+                                <div class="px-4 py-3 flex items-center justify-between">
+                                    <span class="text-slate-400">اسم اللعبة الكامل:</span>
+                                    <span id="fp-spec-name" class="font-bold text-white" dir="ltr">Game</span>
+                                </div>
+                                <div class="px-4 py-3 flex items-center justify-between">
+                                    <span class="text-slate-400">حجم الملف المضغوط:</span>
+                                    <span id="dl-game-size" class="font-black text-sky-400" dir="ltr">0 GB</span>
+                                </div>
+                                <div class="px-4 py-3 flex items-center justify-between">
+                                    <span class="text-slate-400">سيرفر التحميل:</span>
+                                    <span class="font-bold text-emerald-400">MediaFire (رابط مباشر سريع)</span>
+                                </div>
+                                <div class="px-4 py-3 flex items-center justify-between gap-2">
+                                    <span class="text-slate-400 shrink-0">اسم المجلد داخل Steam\steamapps\common:</span>
+                                    <div class="flex items-center gap-2">
+                                        <code id="dl-folder-name" class="text-xs bg-cyber-card px-2.5 py-1 rounded border border-cyber-border text-amber-300 font-mono" dir="ltr">Folder</code>
+                                        <button onclick="copyTextById('dl-folder-name')" class="text-xs bg-sky-500/20 text-sky-400 px-2.5 py-1 rounded font-bold cursor-pointer hover:bg-sky-500/30">نسخ</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Direct Download Box -->
+                        <div class="bg-gradient-to-r from-sky-950/70 to-blue-950/70 border border-sky-500/40 rounded-xl p-6 text-center space-y-4">
+                            <h3 class="text-base sm:text-lg font-black text-white">رابط تحميل اللعبة جاهز الآن</h3>
+                            <p class="text-xs text-slate-300">اضغط على الزر بالأسفل للانتقال مباشرة إلى صفحة التحميل على MediaFire</p>
+                            <a id="dl-mediafire-link" href="#" target="_blank" rel="noopener noreferrer" onclick="showToast('جاري التوجيه إلى رابط MediaFire...')" 
+                               class="w-full sm:w-auto inline-flex py-4 px-8 rounded-xl bg-gradient-to-r from-sky-500 to-blue-600 hover:from-sky-400 hover:to-blue-500 text-white font-black text-sm sm:text-base items-center justify-center gap-2.5 shadow-lg shadow-sky-500/30 transition-all">
+                                <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4"></path>
+                                </svg>
+                                <span>تحميل اللعبة الآن من MediaFire</span>
+                            </a>
+                        </div>
+                    </div>
+                </article>
+
+            </div>
+
+            <!-- SIDEBAR COLUMN: Categories, Most Downloaded & Quick Guide (4 Columns on Desktop) -->
+            <aside class="lg:col-span-4 space-y-6">
+
+                <!-- Widget 0: Video Tutorial Widget (Saleem & Asser Guide) -->
+                <div class="bg-cyber-card border border-cyber-border rounded-xl overflow-hidden card-shadow">
+                    <div class="bg-[#19202e] px-4 py-3 border-b border-cyber-border flex items-center justify-between gap-2">
+                        <div class="flex items-center gap-2">
+                            <span class="w-2 h-2 rounded-full bg-red-500 animate-pulse"></span>
+                            <h3 class="text-sm font-black text-white">فيديو شرح التحميل والـ Verify</h3>
+                        </div>
+                        <button onclick="openVideoModal()" class="text-[11px] bg-sky-500/20 hover:bg-sky-500/30 text-sky-400 px-2.5 py-1 rounded font-bold cursor-pointer transition-colors">
+                            تغيير الفيديو
+                        </button>
+                    </div>
+                    <div class="p-3.5 space-y-2.5">
+                        <div id="sidebar-video-wrapper" class="relative aspect-video rounded-lg overflow-hidden bg-cyber-bg border border-cyber-border flex items-center justify-center">
+                            <!-- Video iframe or placeholder injected via JS -->
+                        </div>
+                        <p class="text-[11px] text-slate-400 text-center">شرح عملي من سليم وآسر لطريقة نقل الملفات وتشغيلها على Steam</p>
+                    </div>
+                </div>
+
+                <!-- Widget 1: Quick Steam Verify Box -->
+                <div class="bg-cyber-card border border-cyber-border rounded-xl overflow-hidden card-shadow">
+                    <div class="bg-[#19202e] px-4 py-3 border-b border-cyber-border flex items-center gap-2">
+                        <span class="w-2 h-2 rounded-full bg-sky-400"></span>
+                        <h3 class="text-sm font-black text-white">طريقة تشغيل الألعاب على Steam</h3>
+                    </div>
+                    <div class="p-4 text-xs text-slate-300 space-y-3 leading-relaxed">
+                        <p>1. قم بتحميل اللعبة من رابط <span class="text-sky-400 font-bold">MediaFire</span> وفك الضغط عنها.</p>
+                        <p>2. انقل مجلد اللعبة إلى مسار ستيم:</p>
+                        <div class="bg-cyber-bg border border-cyber-border rounded-lg p-2 flex items-center justify-between gap-2">
+                            <code class="text-[11px] text-sky-400 font-mono truncate" dir="ltr">Steam\steamapps\common</code>
+                            <button onclick="copySteamPath()" class="text-[11px] bg-sky-500/20 text-sky-400 px-2 py-0.5 rounded font-bold shrink-0 cursor-pointer hover:bg-sky-500/30">نسخ</button>
+                        </div>
+                        <p>3. افتح Steam واضغط <b>Install</b> ثم اعمل <b>Verify</b> للتعرف على الملفات فوراً.</p>
+                        <button onclick="openGuideModal()" class="w-full py-2 rounded-lg bg-cyber-bg hover:bg-slate-800 border border-cyber-border text-sky-400 font-bold transition-colors cursor-pointer">
+                            عرض الشرح المصور بالتفصيل &larr;
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Widget 2: Categories with Counters -->
+                <div class="bg-cyber-card border border-cyber-border rounded-xl overflow-hidden card-shadow">
+                    <div class="bg-[#19202e] px-4 py-3 border-b border-cyber-border flex items-center gap-2">
+                        <span class="w-2 h-2 rounded-full bg-sky-400"></span>
+                        <h3 class="text-sm font-black text-white">أقسام الألعاب</h3>
+                    </div>
+                    <div id="sidebar-categories" class="divide-y divide-cyber-border/60 text-xs">
+                        <!-- Injected dynamically via JS -->
+                    </div>
+                </div>
+
+                <!-- Widget 3: Most Popular / Top Games -->
+                <div class="bg-cyber-card border border-cyber-border rounded-xl overflow-hidden card-shadow">
+                    <div class="bg-[#19202e] px-4 py-3 border-b border-cyber-border flex items-center gap-2">
+                        <span class="w-2 h-2 rounded-full bg-amber-400"></span>
+                        <h3 class="text-sm font-black text-white">الأكثر تحميلاً في الموقع</h3>
+                    </div>
+                    <div id="popular-games-list" class="p-3 space-y-3">
+                        <!-- Top 5 games injected via JS -->
+                    </div>
+                </div>
+
+                <!-- Widget 4: Library Stats & Reset -->
+                <div class="bg-cyber-card border border-cyber-border rounded-xl p-4 card-shadow space-y-3">
+                    <div class="flex items-center justify-between text-xs">
+                        <span class="text-slate-400">إجمالي الألعاب المرفوعة:</span>
+                        <span id="total-games-count" class="font-black text-sky-400 text-sm">39</span>
+                    </div>
+                    <div class="flex items-center justify-between text-xs">
+                        <span class="text-slate-400">إجمالي حجم المكتبة:</span>
+                        <span id="total-size-count" class="font-bold text-white" dir="ltr">0 GB</span>
+                    </div>
+                    <div class="pt-2 border-t border-cyber-border flex items-center justify-between">
+                        <button onclick="resetDefaultGames()" class="text-[11px] text-slate-400 hover:text-sky-400 underline cursor-pointer">
+                            استعادة القائمة الافتراضية
+                        </button>
+                        <span class="text-[11px] text-emerald-400 font-bold">● الروابط تعمل</span>
+                    </div>
+                </div>
+
+            </aside>
+        </div>
+
+    </main>
+
+    <!-- Footer -->
+    <footer class="border-t border-cyber-border bg-cyber-card mt-12">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-6 flex flex-col sm:flex-row items-center justify-between gap-4 text-xs text-slate-400">
+            <div class="flex items-center gap-2">
+                <span class="font-black text-white text-sm" dir="ltr">SELA<span class="text-sky-400">.GG</span></span>
+                <span>— جميع الحقوق محفوظة لموقع سليم وآسر لتحميل ألعاب الكمبيوتر © 2026</span>
+            </div>
+            <div class="flex items-center gap-4">
+                <button onclick="openGuideModal()" class="hover:text-white transition-colors cursor-pointer">طريقة التحميل</button>
+                <button onclick="openAddGameModal()" class="hover:text-white transition-colors cursor-pointer">إضافة لعبة</button>
+            </div>
+        </div>
+    </footer>
+
+    <!-- ================= MODALS ================= -->
+
+    <!-- 1. Installation & Verify Guide Modal -->
+    <div id="guide-modal" class="fixed inset-0 z-50 hidden items-center justify-center bg-black/80 backdrop-blur-sm p-4">
+        <div class="bg-cyber-card border border-cyber-border rounded-2xl max-w-2xl w-full max-h-[90vh] overflow-y-auto p-6 shadow-2xl">
+            <div class="flex items-center justify-between border-b border-cyber-border pb-4 mb-5">
+                <div class="flex items-center gap-2.5">
+                    <div class="w-9 h-9 rounded-xl bg-sky-500/20 text-sky-400 flex items-center justify-center font-bold">?</div>
+                    <h2 class="text-xl font-black text-white">خطوات التثبيت وعمل Verify في Steam</h2>
+                </div>
+                <button onclick="closeModal('guide-modal')" class="text-slate-400 hover:text-white p-1 rounded-lg cursor-pointer">
+                    <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path></svg>
+                </button>
+            </div>
+
+            <div class="space-y-4 text-sm text-slate-300">
+                <div class="bg-cyber-bg p-4 rounded-xl border border-cyber-border">
+                    <div class="flex items-center gap-2 text-sky-400 font-bold mb-1">
+                        <span class="w-6 h-6 rounded-full bg-sky-500/20 flex items-center justify-center text-xs">1</span>
+                        <span>فك الضغط عن ملفات اللعبة</span>
+                    </div>
+                    <p class="text-slate-400 pr-8">بعد تحميل ملفات اللعبة من رابط MediaFire، استخدم برنامج WinRAR لفك الضغط في مجلد واحد يحمل اسم اللعبة الرسمي.</p>
+                </div>
+
+                <div class="bg-cyber-bg p-4 rounded-xl border border-cyber-border">
+                    <div class="flex items-center gap-2 text-sky-400 font-bold mb-2">
+                        <span class="w-6 h-6 rounded-full bg-sky-500/20 flex items-center justify-center text-xs">2</span>
+                        <span>نقل المجلد لمسار ألعاب Steam</span>
+                    </div>
+                    <p class="text-slate-400 pr-8 mb-2">انقل مجلد اللعبة بالكامل إلى مسار مكتبة ستيم لديك:</p>
+                    <div class="mr-8 flex items-center justify-between bg-cyber-card border border-cyber-border rounded-lg px-3 py-2">
+                        <code class="text-xs text-sky-400 font-mono select-all" dir="ltr">C:\Program Files (x86)\Steam\steamapps\common</code>
+                        <button onclick="copySteamPath()" class="text-xs bg-sky-500/10 hover:bg-sky-500/20 text-sky-400 px-2.5 py-1 rounded font-bold cursor-pointer">نسخ</button>
+                    </div>
+                </div>
+
+                <div class="bg-cyber-bg p-4 rounded-xl border border-cyber-border">
+                    <div class="flex items-center gap-2 text-sky-400 font-bold mb-1">
+                        <span class="w-6 h-6 rounded-full bg-sky-500/20 flex items-center justify-center text-xs">3</span>
+                        <span>التحقق من الملفات (Verify Integrity)</span>
+                    </div>
+                    <p class="text-slate-400 pr-8">افتح برنامج Steam، اضغط <b>Install</b> على اللعبة واختار نفس القرص، أو اضغط كليك يمين على اللعبة &larr; <b>Properties</b> &larr; <b>Installed Files</b> &larr; <b>Verify integrity of game files</b>.</p>
+                </div>
+
+                <!-- Embedded Tutorial Video inside Guide Modal -->
+                <div class="bg-cyber-bg p-4 rounded-xl border border-cyber-border space-y-2.5">
+                    <div class="flex items-center justify-between">
+                        <span class="text-sky-400 font-bold">فيديو الشرح العملي:</span>
+                        <button onclick="closeModal('guide-modal'); openVideoModal();" class="text-xs text-sky-400 hover:underline font-bold cursor-pointer">تعديل رابط الفيديو</button>
+                    </div>
+                    <div id="modal-video-wrapper" class="aspect-video rounded-lg overflow-hidden bg-cyber-card border border-cyber-border flex items-center justify-center">
+                        <!-- Video iframe injected via JS -->
+                    </div>
+                </div>
+            </div>
+
+            <div class="mt-6 flex justify-end">
+                <button onclick="closeModal('guide-modal')" class="px-5 py-2.5 rounded-xl bg-sky-500 text-white font-bold text-sm cursor-pointer">فهمت، شكراً!</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- 2. Set Tutorial Video Link Modal -->
+    <div id="video-modal" class="fixed inset-0 z-50 hidden items-center justify-center bg-black/80 backdrop-blur-sm p-4">
+        <div class="bg-cyber-card border border-cyber-border rounded-2xl max-w-md w-full p-6 shadow-2xl">
+            <div class="flex items-center justify-between border-b border-cyber-border pb-4 mb-4">
+                <h2 class="text-lg font-black text-white">إضافة رابط فيديو الشرح</h2>
+                <button onclick="closeModal('video-modal')" class="text-slate-400 hover:text-white p-1 rounded-lg cursor-pointer">
+                    <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path></svg>
+                </button>
+            </div>
+            <form onsubmit="saveTutorialVideo(event)" class="space-y-4 text-sm">
+                <div>
+                    <label class="block text-slate-300 font-bold mb-1">اختر ملف الفيديو من جهازك (MP4 / WebM) *</label>
+                    <input type="file" id="tutorial-video-file" accept="video/*" required
+                        class="w-full bg-cyber-bg border border-cyber-border rounded-xl px-3 py-2.5 text-xs text-slate-300 file:ml-3 file:py-1.5 file:px-3 file:rounded-lg file:border-0 file:text-xs file:font-bold file:bg-sky-500/20 file:text-sky-400 hover:file:bg-sky-500/30 cursor-pointer">
+                    <p class="text-[11px] text-slate-400 mt-1.5 leading-relaxed">
+                        اختر فيديو الشرح اللي صورته من جهازك، وهيشتغل فوراً جوه الموقع ويتحفظ معاك لما تصدر الكود لـ Google Sites.
+                    </p>
+                </div>
+                <div class="pt-2 flex items-center justify-end gap-2">
+                    <button type="button" onclick="closeModal('video-modal')" class="px-4 py-2 rounded-xl bg-cyber-bg text-slate-300 font-bold cursor-pointer">إلغاء</button>
+                    <button type="submit" class="px-5 py-2 rounded-xl bg-sky-500 text-white font-black cursor-pointer">رفع وتشغيل الفيديو</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <!-- 3. Add New Game Modal -->
+    <div id="add-game-modal" class="fixed inset-0 z-50 hidden items-center justify-center bg-black/80 backdrop-blur-sm p-4">
+        <div class="bg-cyber-card border border-cyber-border rounded-2xl max-w-lg w-full max-h-[90vh] overflow-y-auto p-6 shadow-2xl">
+            <div class="flex items-center justify-between border-b border-cyber-border pb-4 mb-5">
+                <h2 class="text-xl font-black text-white">نشر لعبة جديدة في الموقع</h2>
+                <button onclick="closeModal('add-game-modal')" class="text-slate-400 hover:text-white p-1 rounded-lg cursor-pointer">
+                    <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path></svg>
+                </button>
+            </div>
+
+            <form id="add-game-form" onsubmit="handleAddGame(event)" class="space-y-4 text-sm">
+                <div>
+                    <label class="block text-slate-300 font-bold mb-1">اسم اللعبة *</label>
+                    <input type="text" id="new-title" required placeholder="مثال: Elden Ring" dir="ltr"
+                        class="w-full bg-cyber-bg border border-cyber-border rounded-xl px-3.5 py-2.5 text-white focus:outline-none focus:border-sky-500">
+                </div>
+
+                <div class="grid grid-cols-2 gap-3">
+                    <div>
+                        <label class="block text-slate-300 font-bold mb-1">التصنيف *</label>
+                        <select id="new-genre" class="w-full bg-cyber-bg border border-cyber-border rounded-xl px-3.5 py-2.5 text-white focus:outline-none focus:border-sky-500">
+                            <option value="أكشن وقتال">أكشن وقتال</option>
+                            <option value="سباقات">سباقات</option>
+                            <option value="رياضة وتعاوني">رياضة وتعاوني</option>
+                            <option value="رعب وألغاز">رعب وألغاز</option>
+                            <option value="محاكاة وإندي">محاكاة وإندي</option>
+                        </select>
+                    </div>
+                    <div>
+                        <label class="block text-slate-300 font-bold mb-1">الحجم الفعلي *</label>
+                        <div class="flex gap-1.5" dir="ltr">
+                            <input type="number" step="0.1" id="new-size" required placeholder="6.2"
+                                class="w-full bg-cyber-bg border border-cyber-border rounded-xl px-3 py-2.5 text-white focus:outline-none focus:border-sky-500">
+                            <select id="new-unit" class="bg-cyber-bg border border-cyber-border rounded-xl px-2.5 py-2.5 text-sky-400 font-bold focus:outline-none">
+                                <option value="GB">GB</option>
+                                <option value="MB">MB</option>
+                            </select>
+                        </div>
+                    </div>
+                </div>
+
+                <div>
+                    <label class="block text-slate-300 font-bold mb-1">اسم مجلد اللعبة في Steam (common) *</label>
+                    <input type="text" id="new-folder" required placeholder="مثال: ELDEN RING" dir="ltr"
+                        class="w-full bg-cyber-bg border border-cyber-border rounded-xl px-3.5 py-2.5 text-white font-mono text-xs focus:outline-none focus:border-sky-500">
+                </div>
+
+                <div>
+                    <label class="block text-slate-300 font-bold mb-1">رابط التحميل (MediaFire) *</label>
+                    <input type="url" id="new-link" required placeholder="https://www.mediafire.com/file/..." dir="ltr"
+                        class="w-full bg-cyber-bg border border-cyber-border rounded-xl px-3.5 py-2.5 text-white focus:outline-none focus:border-sky-500">
+                </div>
+
+                <div>
+                    <label class="block text-slate-300 font-bold mb-1">رفع صورة بوستر من الجهاز (اختياري)</label>
+                    <input type="file" id="new-image-file" accept="image/*"
+                        class="w-full bg-cyber-bg border border-cyber-border rounded-xl px-3 py-2 text-xs text-slate-300 file:ml-3 file:py-1.5 file:px-3 file:rounded-lg file:border-0 file:text-xs file:font-bold file:bg-sky-500/20 file:text-sky-400 hover:file:bg-sky-500/30 cursor-pointer">
+                </div>
+
+                <div>
+                    <label class="block text-slate-300 font-bold mb-1">وصف وملاحظات اللعبة</label>
+                    <textarea id="new-notes" rows="2" placeholder="اكتب وصف مختصر للعبة وطريقة التشغيل..."
+                        class="w-full bg-cyber-bg border border-cyber-border rounded-xl px-3.5 py-2 text-white focus:outline-none focus:border-sky-500"></textarea>
+                </div>
+
+                <div class="pt-2 flex items-center justify-end gap-3">
+                    <button type="button" onclick="closeModal('add-game-modal')" class="px-4 py-2.5 rounded-xl bg-cyber-bg text-slate-300 font-bold cursor-pointer">إلغاء</button>
+                    <button type="submit" class="px-6 py-2.5 rounded-xl bg-sky-500 hover:bg-sky-400 text-white font-black cursor-pointer">نشر اللعبة</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <!-- 4. Edit Game Data Modal -->
+    <div id="edit-link-modal" class="fixed inset-0 z-50 hidden items-center justify-center bg-black/80 backdrop-blur-sm p-4">
+        <div class="bg-cyber-card border border-cyber-border rounded-2xl max-w-md w-full max-h-[90vh] overflow-y-auto p-6 shadow-2xl">
+            <div class="flex items-center justify-between border-b border-cyber-border pb-4 mb-4">
+                <h2 id="edit-link-title" class="text-lg font-black text-white">تعديل بيانات اللعبة</h2>
+                <button onclick="closeModal('edit-link-modal')" class="text-slate-400 hover:text-white p-1 rounded-lg cursor-pointer">
+                    <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path></svg>
+                </button>
+            </div>
+            <form onsubmit="saveEditedLink(event)" class="space-y-4 text-sm">
+                <input type="hidden" id="edit-game-id">
+                <div>
+                    <label class="block text-slate-300 font-bold mb-1">اسم اللعبة *</label>
+                    <input type="text" id="edit-game-title" required dir="ltr"
+                        class="w-full bg-cyber-bg border border-cyber-border rounded-xl px-3.5 py-2 text-white focus:outline-none focus:border-sky-500">
+                </div>
+                <div>
+                    <label class="block text-slate-300 font-bold mb-1">رابط التحميل المباشر (MediaFire) *</label>
+                    <input type="url" id="edit-game-url" required placeholder="https://www.mediafire.com/file/..." dir="ltr"
+                        class="w-full bg-cyber-bg border border-cyber-border rounded-xl px-3.5 py-2.5 text-white focus:outline-none focus:border-sky-500">
+                </div>
+
+                <div class="grid grid-cols-2 gap-3">
+                    <div>
+                        <label class="block text-slate-300 font-bold mb-1">حجم الملف الفعلي *</label>
+                        <div class="flex gap-1.5" dir="ltr">
+                            <input type="number" step="0.1" id="edit-game-size" required
+                                class="w-full bg-cyber-bg border border-cyber-border rounded-xl px-3 py-2 text-white focus:outline-none focus:border-sky-500">
+                            <select id="edit-game-unit" class="bg-cyber-bg border border-cyber-border rounded-xl px-2 py-2 text-sky-400 font-bold focus:outline-none">
+                                <option value="GB">GB</option>
+                                <option value="MB">MB</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div>
+                        <label class="block text-slate-300 font-bold mb-1">اسم المجلد (common) *</label>
+                        <input type="text" id="edit-game-folder" required dir="ltr"
+                            class="w-full bg-cyber-bg border border-cyber-border rounded-xl px-3 py-2 text-white font-mono text-xs focus:outline-none focus:border-sky-500">
+                    </div>
+                </div>
+
+                <div>
+                    <label class="block text-slate-300 font-bold mb-1">رفع صورة بوستر مخصصة من الجهاز</label>
+                    <input type="file" id="edit-game-image-file" accept="image/*"
+                        class="w-full bg-cyber-bg border border-cyber-border rounded-xl px-3 py-2 text-xs text-slate-300 file:ml-3 file:py-1.5 file:px-3 file:rounded-lg file:border-0 file:text-xs file:font-bold file:bg-sky-500/20 file:text-sky-400 hover:file:bg-sky-500/30 cursor-pointer">
+                </div>
+
+                <div>
+                    <label class="block text-slate-300 font-bold mb-1">وصف وملاحظات التشغيل</label>
+                    <input type="text" id="edit-game-notes" placeholder="مثال: مرفوعة على جزئين - بدون باسورد"
+                        class="w-full bg-cyber-bg border border-cyber-border rounded-xl px-3.5 py-2 text-white focus:outline-none focus:border-sky-500">
+                </div>
+                <div class="pt-2 flex items-center justify-end gap-2">
+                    <button type="button" onclick="closeModal('edit-link-modal')" class="px-4 py-2 rounded-xl bg-cyber-bg text-slate-300 font-bold cursor-pointer">إلغاء</button>
+                    <button type="submit" class="px-5 py-2 rounded-xl bg-sky-500 text-white font-black cursor-pointer">حفظ التعديلات</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <!-- JavaScript Logic -->
+    <script>
+        // Built-in Custom Vector SVG Graphics Poster Generator (100% Reliable Offline & Online)
+        function getGameCoverHtml(game, isLarge = false) {
+            if (game.customImage) {
+                return `<img src="${game.customImage}" alt="${game.title}" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500">`;
+            }
+
+            const c1 = (game.colors && game.colors[0]) || '#0f172a';
+            const c2 = (game.colors && game.colors[1]) || '#1d4ed8';
+            const c3 = (game.colors && game.colors[2]) || '#38bdf8';
+            const uid = `grad_${game.id}_${isLarge ? 'lg' : 'sm'}`;
+
+            const iconsMap = {
+                nfs: `<path d="M5 17h14M6 17l2-5h8l2 5M9 12l1.5-3h3L15 12" stroke="${c3}" stroke-width="2.2" fill="none" stroke-linecap="round"/><circle cx="8" cy="17" r="2" fill="#fff"/><circle cx="16" cy="17" r="2" fill="#fff"/>`,
+                blur: `<polygon points="12,3 21,19 3,19" stroke="${c3}" stroke-width="2.2" fill="none"/><circle cx="12" cy="14" r="3" fill="${c3}"/>`,
+                asphalt: `<path d="M4 16L12 5l8 11H4z" stroke="${c3}" stroke-width="2" fill="none"/><path d="M9 16l3-5 3 5" stroke="#fff" stroke-width="1.8" fill="none"/>`,
+                spiderman: `<circle cx="12" cy="12" r="8" stroke="${c3}" stroke-width="1.8" fill="none"/><path d="M12 4v16M4 12h16M6.3 6.3l11.4 11.4M17.7 6.3L6.3 17.7" stroke="${c3}" stroke-width="1.4"/>`,
+                gta: `<rect x="5" y="5" width="14" height="14" rx="3" stroke="${c3}" stroke-width="2.2" fill="none"/><path d="M9 12h6M12 9v6" stroke="#fff" stroke-width="2" stroke-linecap="round"/>`,
+                fortnite: `<path d="M8 4h8v4h-5v3h4v4h-4v5H8V4z" fill="${c3}"/>`,
+                combat: `<circle cx="12" cy="12" r="7" stroke="${c3}" stroke-width="2" fill="none"/><path d="M12 2v4M12 18v4M2 12h4M18 12h4" stroke="#fff" stroke-width="2" stroke-linecap="round"/>`,
+                rocket: `<circle cx="12" cy="12" r="7" stroke="${c3}" stroke-width="2.2" fill="none"/><polygon points="12,7 16,10 14.5,15 9.5,15 8,10" stroke="#fff" stroke-width="1.6" fill="none"/>`,
+                pes: `<circle cx="12" cy="12" r="8" stroke="${c3}" stroke-width="2" fill="none"/><circle cx="12" cy="12" r="3" fill="${c3}"/>`,
+                unravel: `<path d="M7 16c0-4 3-8 5-8s5 4 5 8" stroke="#f43f5e" stroke-width="2.5" fill="none" stroke-linecap="round"/><path d="M9 16c0-2.5 1.5-5 3-5s3 2.5 3 5" stroke="#38bdf8" stroke-width="2.5" fill="none" stroke-linecap="round"/>`,
+                overcooked: `<path d="M6 13h12v4a3 3 0 01-3 3H9a3 3 0 01-3-3v-4z" stroke="${c3}" stroke-width="2" fill="none"/><path d="M8 10a4 4 0 018 0" stroke="#fff" stroke-width="2" fill="none"/>`,
+                minecraft: `<rect x="6" y="6" width="12" height="12" rx="1.5" stroke="${c3}" stroke-width="2.2" fill="none"/><path d="M6 10h12M10 10v8M14 10v8" stroke="${c3}" stroke-width="1.6"/>`,
+                shawarma: `<path d="M7 17L17 7M9 5l10 10M5 9l10 10" stroke="${c3}" stroke-width="2.2" stroke-linecap="round"/>`,
+                midnight: `<path d="M15 5a7 7 0 104 12.7A7 7 0 0115 5z" stroke="${c3}" stroke-width="2.2" fill="none"/>`,
+                registry: `<rect x="6" y="4" width="12" height="16" rx="2" stroke="${c3}" stroke-width="2" fill="none"/><path d="M9 9h6M9 13h6M9 17h4" stroke="#fff" stroke-width="1.8" stroke-linecap="round"/>`,
+                baldi: `<path d="M6 19V5l6 4 6-4v14" stroke="${c3}" stroke-width="2.2" fill="none" stroke-linejoin="round"/>`,
+                gmod: `<path d="M15 8a4 4 0 100 8h1v-4h-3" stroke="${c3}" stroke-width="2.4" fill="none" stroke-linecap="round"/>`,
+                granny: `<path d="M12 4a6 6 0 00-6 6v5l2 3h8l2-3v-5a6 6 0 00-6-6z" stroke="${c3}" stroke-width="2" fill="none"/><circle cx="10" cy="11" r="1" fill="#fff"/><circle cx="14" cy="11" r="1" fill="#fff"/>`,
+                lego: `<rect x="5" y="8" width="14" height="10" rx="1.5" stroke="${c3}" stroke-width="2" fill="none"/><path d="M8 8V6h3v2M13 8V6h3v2" stroke="#fff" stroke-width="1.8"/>`,
+                chameleon: `<path d="M12 18a6 6 0 10-6-6c0 2 1.5 3.5 3.5 3.5S13 14 13 12.5 12 10 10.5 10" stroke="${c3}" stroke-width="2.2" fill="none" stroke-linecap="round"/>`,
+                mclegends: `<polygon points="12,3 20,8 20,16 12,21 4,16 4,8" stroke="${c3}" stroke-width="2" fill="none"/><path d="M12 8v8M8 12h8" stroke="#fff" stroke-width="2"/>`,
+                neighbours: `<path d="M4 11l8-6 8 6v8a1 1 0 01-1 1H5a1 1 0 01-1-1v-8z" stroke="${c3}" stroke-width="2" fill="none"/><path d="M10 15h4" stroke="#fff" stroke-width="2" stroke-linecap="round"/>`,
+                nickbrawl: `<polygon points="13,3 6,14 12,14 11,21 18,10 12,10" stroke="${c3}" stroke-width="2" fill="none" stroke-linejoin="round"/>`,
+                rematch: `<circle cx="12" cy="12" r="8" stroke="${c3}" stroke-width="2.2" fill="none"/><path d="M8 12h8M12 8v8" stroke="#fff" stroke-width="1.8"/>`,
+                schedule: `<rect x="5" y="6" width="14" height="13" rx="2" stroke="${c3}" stroke-width="2" fill="none"/><path d="M8 4v4M16 4v4M5 10h14" stroke="#fff" stroke-width="1.8"/>`,
+                theroom: `<rect x="6" y="6" width="12" height="12" stroke="${c3}" stroke-width="2" fill="none"/><circle cx="12" cy="12" r="3" stroke="#fff" stroke-width="1.8" fill="none"/>`,
+                theroom2: `<polygon points="12,4 20,12 12,20 4,12" stroke="${c3}" stroke-width="2" fill="none"/><circle cx="12" cy="12" r="2.5" fill="${c3}"/>`,
+                overdose: `<circle cx="12" cy="12" r="7" stroke="${c3}" stroke-width="2" fill="none"/><path d="M9 9l6 6M15 9l-6 6" stroke="#fff" stroke-width="2" stroke-linecap="round"/>`
+            };
+
+            const iconSvg = iconsMap[game.artType] || iconsMap.nfs;
+
+            return `
+                <div class="w-full h-full relative flex items-center justify-center overflow-hidden select-none group-hover:scale-105 transition-transform duration-500" style="background: linear-gradient(135deg, ${c1} 0%, ${c2} 100%);">
+                    <svg class="absolute inset-0 w-full h-full opacity-25" xmlns="http://www.w3.org/2000/svg">
+                        <defs>
+                            <pattern id="${uid}" width="24" height="24" patternUnits="userSpaceOnUse">
+                                <circle cx="2" cy="2" r="1.2" fill="${c3}"/>
+                            </pattern>
+                        </defs>
+                        <rect width="100%" height="100%" fill="url(#${uid})"/>
+                    </svg>
+                    <div class="absolute -right-6 -bottom-6 w-28 h-28 rounded-full opacity-25 blur-xl" style="background: ${c3};"></div>
+                    <div class="relative z-10 flex flex-col items-center justify-center p-3 text-center">
+                        <div class="${isLarge ? 'w-16 h-16 mb-2' : 'w-11 h-11 mb-1.5'} rounded-2xl bg-black/35 backdrop-blur-sm border border-white/15 flex items-center justify-center shadow-lg">
+                            <svg class="${isLarge ? 'w-9 h-9' : 'w-6 h-6'}" viewBox="0 0 24 24">${iconSvg}</svg>
+                        </div>
+                        <span class="${isLarge ? 'text-base sm:text-xl' : 'text-[11px]'} font-black text-white tracking-wide drop-shadow line-clamp-1 px-2" dir="ltr">${game.title}</span>
+                    </div>
+                </div>
+            `;
+        }
+
+        // Complete 39 Games Catalog
+        const defaultGames = [
+            {
+                id: 1,
+                title: "It Takes Two",
+                genre: "رياضة وتعاوني",
+                size: 45.0,
+                unit: "GB",
+                folderName: "It Takes Two",
+                link: "https://www.mediafire.com/",
+                artType: "unravel",
+                colors: ["#581c87", "#c084fc", "#f43f5e"],
+                customImage: "",
+                notes: "أعظم لعبة تعاونية لشخصين على الإطلاق. حجم الملفات 45 GB."
+            },
+            {
+                id: 2,
+                title: "EA Sports FC 26 (FIFA 26)",
+                genre: "رياضة وتعاوني",
+                size: 52.0,
+                unit: "GB",
+                folderName: "EA SPORTS FC 26",
+                link: "https://www.mediafire.com/",
+                artType: "pes",
+                colors: ["#020617", "#1e1b4b", "#38bdf8"],
+                customImage: "",
+                notes: "أحدث إصدار من لعبة كرة القدم الشهيرة (FIFA 26). حجم الملفات 52 GB."
+            },
+            {
+                id: 3,
+                title: "Call of Duty: Black Ops 1",
+                genre: "أكشن وقتال",
+                size: 12.0,
+                unit: "GB",
+                folderName: "Call-of-Duty-Black-Ops-1",
+                link: "https://www.mediafire.com/",
+                artType: "combat",
+                colors: ["#090d16", "#1e293b", "#ef4444"],
+                customImage: "",
+                notes: "نسخة كود بلاك أوبس الكلاسيكية كاملة. حجم الملف 12 GB."
+            },
+            {
+                id: 4,
+                title: "Call of Duty (Classic)",
+                genre: "أكشن وقتال",
+                size: 3.5,
+                unit: "GB",
+                folderName: "Call.Of.Duty",
+                link: "https://www.mediafire.com/",
+                artType: "combat",
+                colors: ["#0f172a", "#334155", "#38bdf8"],
+                customImage: "",
+                notes: "الجزء الأول من سلسلة كول أوف دิวटी الكلاسيكية."
+            },
+            {
+                id: 5,
+                title: "CarX Street",
+                genre: "سباقات",
+                size: 14.5,
+                unit: "GB",
+                folderName: "CarX Street",
+                link: "https://www.mediafire.com/",
+                artType: "nfs",
+                colors: ["#111827", "#1f2937", "#f97316"],
+                customImage: "",
+                notes: "لعبة سباقات الشوارع المفتوحة بواقعية عالية وممتازة."
+            },
+            {
+                id: 6,
+                title: "Grand Theft Auto: San Andreas",
+                genre: "أكشن وقتال",
+                size: 4.2,
+                unit: "GB",
+                folderName: "GTA_San_Andreas",
+                link: "https://www.mediafire.com/",
+                artType: "gta",
+                colors: ["#451a03", "#78350f", "#facc15"],
+                customImage: "",
+                notes: "نسخة سان أندرياس الأصلية النظيفة مع ملف التثبيت والتشغيل."
+            },
+            {
+                id: 7,
+                title: "Brawlhalla",
+                genre: "أكشن وقتال",
+                size: 1.8,
+                unit: "GB",
+                folderName: "Brawlhalla",
+                link: "https://www.mediafire.com/",
+                artType: "nickbrawl",
+                colors: ["#1e1b4b", "#4c1d95", "#38bdf8"],
+                customImage: "",
+                notes: "لعبة القتال والمنصات الجماعية الشهيرة على ستيم."
+            },
+            {
+                id: 8,
+                title: "Brothers: A Tale of Two Sons",
+                genre: "رعب وألغاز",
+                size: 2.1,
+                unit: "GB",
+                folderName: "Brothers.A.Tale.Of.Two.Sons",
+                link: "https://www.mediafire.com/",
+                artType: "unravel",
+                colors: ["#082f49", "#0369a1", "#38bdf8"],
+                customImage: "",
+                notes: "مغامرة عاطفية وألغاز ساحرة لشقيقين."
+            },
+            {
+                id: 9,
+                title: "Burger Shop",
+                genre: "محاكاة وإندي",
+                size: 180,
+                unit: "MB",
+                folderName: "Burger Shop",
+                link: "https://www.mediafire.com/",
+                artType: "shawarma",
+                colors: ["#451a03", "#b45309", "#f59e0b"],
+                customImage: "",
+                notes: "لعبة إدارة مطعم البرجر الكلاسيكية السريعة (180 MB)."
+            },
+            {
+                id: 10,
+                title: "Trackmania Turbo",
+                genre: "سباقات",
+                size: 4.6,
+                unit: "GB",
+                folderName: "Trackmania.Turbo",
+                link: "https://www.mediafire.com/",
+                artType: "blur",
+                colors: ["#312e81", "#4338ca", "#00f0ff"],
+                customImage: "",
+                notes: "سباقات السرعة المجنونة والتحديات الصعبة."
+            },
+            {
+                id: 11,
+                title: "Pro Evolution Soccer 2019",
+                genre: "رياضة وتعاوني",
+                size: 24.0,
+                unit: "GB",
+                folderName: "Pro Evolution Soccer 2019",
+                link: "https://www.mediafire.com/",
+                artType: "pes",
+                colors: ["#022c22", "#047857", "#34d399"],
+                customImage: "",
+                notes: "نسخة PES 2019 الكاملة بجرافيك رائع وملاعب مطورة."
+            },
+            {
+                id: 12,
+                title: "Need for Speed: Most Wanted",
+                genre: "سباقات",
+                size: 6.2,
+                unit: "GB",
+                folderName: "Need for Speed(TM) Most Wanted",
+                link: "https://www.mediafire.com/",
+                artType: "nfs",
+                colors: ["#0f172a", "#0284c7", "#38bdf8"],
+                customImage: "",
+                notes: "نسخة السباقات الكلاسيكية الأشهر (NFSMW). حجم الملف المضغوط 6.2 GB."
+            },
+            {
+                id: 13,
+                title: "Minecraft Java / TLauncher",
+                genre: "رياضة وتعاوني",
+                size: 850,
+                unit: "MB",
+                folderName: "Minecraft.v1.19.1",
+                link: "https://www.mediafire.com/",
+                artType: "minecraft",
+                colors: ["#052e16", "#15803d", "#4ade80"],
+                customImage: "",
+                notes: "نسخة ماينكرافت 1.19.1 الجاهزة للتشغيل المباشر أو عبر TLauncher."
+            },
+            {
+                id: 14,
+                title: "Rocket League",
+                genre: "رياضة وتعاوني",
+                size: 22.5,
+                unit: "GB",
+                folderName: "rocketleague",
+                link: "https://www.mediafire.com/",
+                artType: "rocket",
+                colors: ["#172554", "#1d4ed8", "#60a5fa"],
+                customImage: "",
+                notes: "انقل المجلد إلى steamapps\\common واعمل Verify من داخل Steam."
+            },
+            {
+                id: 15,
+                title: "Unravel Two",
+                genre: "رياضة وتعاوني",
+                size: 4.9,
+                unit: "GB",
+                folderName: "UnravelTwo",
+                link: "https://www.mediafire.com/",
+                artType: "unravel",
+                colors: ["#450a0a", "#1e3a8a", "#f43f5e"],
+                customImage: "",
+                notes: "لعبة ألغاز ومغامرات تعاونية لشخصين على نفس الجهاز أو أونلاين."
+            },
+            {
+                id: 16,
+                title: "eFootball PES 2017",
+                genre: "رياضة وتعاوني",
+                size: 11.8,
+                unit: "GB",
+                folderName: "PES 2017",
+                link: "https://www.mediafire.com/",
+                artType: "pes",
+                colors: ["#022c22", "#047857", "#34d399"],
+                customImage: "",
+                notes: "نسخة PES 2017 المحدثة بباتش الانتقالات والأطقم الكاملة."
+            },
+            {
+                id: 17,
+                title: "Overcooked! 2",
+                genre: "رياضة وتعاوني",
+                size: 3.2,
+                unit: "GB",
+                folderName: "Overcooked! 2",
+                link: "https://www.mediafire.com/",
+                artType: "overcooked",
+                colors: ["#451a03", "#b45309", "#fbbf24"],
+                customImage: "",
+                notes: "لعبة الطبخ الجماعية الممتعة — تدعم اللعب الجماعي مع الأصدقاء."
+            },
+            {
+                id: 18,
+                title: "The Registry",
+                genre: "رعب وألغاز",
+                size: 450,
+                unit: "MB",
+                folderName: "The Registry",
+                link: "https://www.mediafire.com/",
+                artType: "registry",
+                colors: ["#1e1b4b", "#4c1d95", "#a78bfa"],
+                customImage: "",
+                notes: "لعبة محاكاة وغموض خفيفة وسريعة التحميل (450 MB)."
+            },
+            {
+                id: 19,
+                title: "The Amazing Spider-Man 2",
+                genre: "أكشن وقتال",
+                size: 8.1,
+                unit: "GB",
+                folderName: "The-Amazing-Spider-Man-2",
+                link: "https://www.mediafire.com/",
+                artType: "spiderman",
+                colors: ["#450a0a", "#991b1b", "#ef4444"],
+                customImage: "",
+                notes: "انقل المجلد لمسار ستيم أو شغلها مباشرة عبر SmartSteamEmu."
+            },
+            {
+                id: 20,
+                title: "Asphalt Legends Unite",
+                genre: "سباقات",
+                size: 3.8,
+                unit: "GB",
+                folderName: "Asphalt Legends Unite",
+                link: "https://www.mediafire.com/",
+                artType: "asphalt",
+                colors: ["#2e1065", "#6d28d9", "#c084fc"],
+                customImage: "",
+                notes: "لعبة سباقات أركيد سريعة — مجانية على ستيم وتقبل Verify فوراً."
+            },
+            {
+                id: 21,
+                title: "Combat Master",
+                genre: "أكشن وقتال",
+                size: 1.4,
+                unit: "GB",
+                folderName: "Combat Master",
+                link: "https://www.mediafire.com/",
+                artType: "combat",
+                colors: ["#083344", "#0e7490", "#22d3ee"],
+                customImage: "",
+                notes: "لعبة تصويب سريعة جداً للأجهزة المتوسطة والضعيفة — تدعم Verify في ستيم."
+            },
+            {
+                id: 22,
+                title: "Shift At Midnight",
+                genre: "رعب وألغاز",
+                size: 680,
+                unit: "MB",
+                folderName: "Shift At Midnight",
+                link: "https://www.mediafire.com/",
+                artType: "midnight",
+                colors: ["#090d16", "#7f1d1d", "#f87171"],
+                customImage: "",
+                notes: "تجربة رعب وإثارة في وردية منتصف الليل (680 MB)."
+            },
+            {
+                id: 23,
+                title: "Blur",
+                genre: "سباقات",
+                size: 4.5,
+                unit: "GB",
+                folderName: "Blur",
+                link: "https://www.mediafire.com/",
+                artType: "blur",
+                colors: ["#500724", "#be185d", "#f472b6"],
+                customImage: "",
+                notes: "أقوى لعبة سباقات سيارات بأسلحة وقدرات خاصة — تدعم اللعب الجماعي LAN."
+            },
+            {
+                id: 24,
+                title: "Shawarma Legend",
+                genre: "محاكاة وإندي",
+                size: 320,
+                unit: "MB",
+                folderName: "Shawarma Legend",
+                link: "https://www.mediafire.com/",
+                artType: "shawarma",
+                colors: ["#422006", "#a16207", "#facc15"],
+                customImage: "",
+                notes: "محاكاة مطعم الشاورما الشهيرة — حجم خفيف 320 ميجا فقط."
+            },
+            {
+                id: 25,
+                title: "Grand Theft Auto IV",
+                genre: "أكشن وقتال",
+                size: 20.4,
+                unit: "GB",
+                folderName: "Grand Theft Auto IV",
+                link: "https://www.mediafire.com/",
+                artType: "gta",
+                colors: ["#431407", "#c2410c", "#fb923c"],
+                customImage: "",
+                notes: "نسخة GTA IV الكاملة — التشغيل من ملف LaunchGTAIV.exe أو عبر Steam."
+            },
+            {
+                id: 26,
+                title: "Fortnite",
+                genre: "أكشن وقتال",
+                size: 48.0,
+                unit: "GB",
+                folderName: "Fortnite",
+                link: "https://www.mediafire.com/",
+                artType: "fortnite",
+                colors: ["#0c4a6e", "#0284c7", "#38bdf8"],
+                customImage: "",
+                notes: "ملفات فورتنايت الجاهزة لتوفير تحميل الـ 48 جيجا من Epic Games."
+            },
+            {
+                id: 27,
+                title: "Baldi's Basics Classic Remastered",
+                genre: "رعب وألغاز",
+                size: 520,
+                unit: "MB",
+                folderName: "Baldi's Basics Classic Remastered",
+                link: "https://www.mediafire.com/",
+                artType: "baldi",
+                colors: ["#052e16", "#166534", "#4ade80"],
+                customImage: "",
+                notes: "النسخة المحسنة من لعبة ألغاز ورعب المدرسة الشهيرة (520 MB)."
+            },
+            {
+                id: 28,
+                title: "Garry's Mod",
+                genre: "محاكاة وإندي",
+                size: 4.8,
+                unit: "GB",
+                folderName: "GarrysMod",
+                link: "https://www.mediafire.com/",
+                artType: "gmod",
+                colors: ["#0c4a6e", "#0369a1", "#38bdf8"],
+                customImage: "",
+                notes: "لعبة الساندبوكس والمودات الأشهر على ستيم — جاهزة لنقل المجلد وعمل Verify."
+            },
+            {
+                id: 29,
+                title: "Granny Remake",
+                genre: "رعب وألغاز",
+                size: 1.9,
+                unit: "GB",
+                folderName: "GrannyRemake",
+                link: "https://www.mediafire.com/",
+                artType: "granny",
+                colors: ["#1c1917", "#7f1d1d", "#ef4444"],
+                customImage: "",
+                notes: "نسخة الريميك المحسنة بجرافيك عالي من لعبة الرعب والهروب Granny."
+            },
+            {
+                id: 30,
+                title: "LEGO Harry Potter: Years 1-4",
+                genre: "رياضة وتعاوني",
+                size: 5.4,
+                unit: "GB",
+                folderName: "LEGO Harry Potter Years 1-4",
+                link: "https://www.mediafire.com/",
+                artType: "lego",
+                colors: ["#3b0764", "#7e22ce", "#fbbf24"],
+                customImage: "",
+                notes: "مغامرات هاري بوتر في عالم الليجو — تدعم اللعب التعاوني لشخصين."
+            },
+            {
+                id: 31,
+                title: "Meccha Chameleon",
+                genre: "محاكاة وإندي",
+                size: 950,
+                unit: "MB",
+                folderName: "MECCHA CHAMELEON",
+                link: "https://www.mediafire.com/",
+                artType: "chameleon",
+                colors: ["#022c22", "#065f46", "#10b981"],
+                customImage: "",
+                notes: "لعبة أكشن وإندي خفيفة وممتعة — حجم مضغوط 950 MB."
+            },
+            {
+                id: 32,
+                title: "Minecraft Legends",
+                genre: "محاكاة وإندي",
+                size: 7.6,
+                unit: "GB",
+                folderName: "Minecraft.Legends.v2023.08.03",
+                link: "https://www.mediafire.com/",
+                artType: "mclegends",
+                colors: ["#064e3b", "#047857", "#fbbf24"],
+                customImage: "",
+                notes: "لعبة الاستراتيجية والمغامرات في عالم ماينكرافت إصدار v2023.08.03."
+            },
+            {
+                id: 33,
+                title: "Neighbours Back From Hell",
+                genre: "رعب وألغاز",
+                size: 2.3,
+                unit: "GB",
+                folderName: "Neighbours.Back.From.Hell.v1.0.5",
+                link: "https://www.mediafire.com/",
+                artType: "neighbours",
+                colors: ["#450a0a", "#b91c1c", "#facc15"],
+                customImage: "",
+                notes: "نسخة الريماستر الكاملة من لعبة مقالب الجار المزعج (v1.0.5)."
+            },
+            {
+                id: 34,
+                title: "Nickelodeon All-Star Brawl 2",
+                genre: "أكشن وقتال",
+                size: 12.4,
+                unit: "GB",
+                folderName: "Nickelodeon.All.Star.Brawl.2.v1.2.0.Incl.ALL.DLC",
+                link: "https://www.mediafire.com/",
+                artType: "nickbrawl",
+                colors: ["#431407", "#ea580c", "#fde047"],
+                customImage: "",
+                notes: "لعبة القتال الجماعية لشخصيات نيكلوديون شاملة جميع الإضافات."
+            },
+            {
+                id: 35,
+                title: "Rematch",
+                genre: "رياضة وتعاوني",
+                size: 6.5,
+                unit: "GB",
+                folderName: "Rematch",
+                link: "https://www.mediafire.com/",
+                artType: "rematch",
+                colors: ["#052e16", "#16a34a", "#4ade80"],
+                customImage: "",
+                notes: "لعبة كرة قدم حماسية بأسلوب أركيد سريع وتنافسي."
+            },
+            {
+                id: 36,
+                title: "Schedule I",
+                genre: "محاكاة وإندي",
+                size: 3.4,
+                unit: "GB",
+                folderName: "Schedule 1",
+                link: "https://www.mediafire.com/",
+                artType: "schedule",
+                colors: ["#0f172a", "#1e3a8a", "#38bdf8"],
+                customImage: "",
+                notes: "لعبة محاكاة واستراتيجية وإدارة — جاهزة للتشغيل المباشر."
+            },
+            {
+                id: 37,
+                title: "The Room",
+                genre: "رعب وألغاز",
+                size: 420,
+                unit: "MB",
+                folderName: "The.Room",
+                link: "https://www.mediafire.com/",
+                artType: "theroom",
+                colors: ["#271506", "#78350f", "#fbbf24"],
+                customImage: "",
+                notes: "الجزء الأول من سلسلة الألغاز والغموض الميكانيكية الشهيرة (420 MB)."
+            },
+            {
+                id: 38,
+                title: "The Room Two",
+                genre: "رعب وألغاز",
+                size: 610,
+                unit: "MB",
+                folderName: "The.Room.Two.v0.0.38",
+                link: "https://www.mediafire.com/",
+                artType: "theroom2",
+                colors: ["#1e1b4b", "#3730a3", "#c084fc"],
+                customImage: "",
+                notes: "الجزء الثاني من سلسلة The Room إصدار v0.0.38 بحجم 610 MB."
+            },
+            {
+                id: 39,
+                title: "Total Overdose",
+                genre: "أكشن وقتال",
+                size: 1.3,
+                unit: "GB",
+                folderName: "Total-Overdose-DownloadComputerGames.net",
+                link: "https://www.mediafire.com/",
+                artType: "overdose",
+                colors: ["#431407", "#9a3412", "#f97316"],
+                customImage: "",
+                notes: "لعبة الأكشن والعالم المفتوح الكلاسيكية المحبوبة — ملف مضغوط 1.3 GB."
+            }
+        ];
+
+        // State Management
+        let games = [];
+        let currentCategory = 'الكل';
+        let tutorialVideoData = '';
+
+        function renderTutorialVideo() {
+            const sidebarWrapper = document.getElementById('sidebar-video-wrapper');
+            const modalWrapper = document.getElementById('modal-video-wrapper');
+
+            const contentHtml = tutorialVideoData
+                ? `<video src="${tutorialVideoData}" controls playsinline class="w-full h-full object-contain bg-black"></video>`
+                : `<div onclick="openVideoModal()" class="text-center p-4 cursor-pointer group">
+                        <div class="w-11 h-11 rounded-full bg-red-500/20 text-red-400 group-hover:bg-red-500 group-hover:text-white flex items-center justify-center mx-auto mb-2 transition-colors">
+                            <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg>
+                        </div>
+                        <p class="text-xs font-bold text-white group-hover:text-sky-400 transition-colors">اضغط لرفع فيديو الشرح من جهازك</p>
+                        <p class="text-[10px] text-slate-400 mt-0.5">يدعم ملفات الفيديو MP4 / MOV / WebM</p>
+                   </div>`;
+
+            if (sidebarWrapper) sidebarWrapper.innerHTML = contentHtml;
+            if (modalWrapper) modalWrapper.innerHTML = contentHtml;
+        }
+
+        function openVideoModal() {
+            document.getElementById('tutorial-video-file').value = '';
+            const modal = document.getElementById('video-modal');
+            modal.classList.remove('hidden');
+            modal.classList.add('flex');
+        }
+
+        function saveTutorialVideo(e) {
+            e.preventDefault();
+            const fileInput = document.getElementById('tutorial-video-file');
+            if (!fileInput.files || !fileInput.files[0]) return;
+
+            const file = fileInput.files[0];
+            showToast('جاري رفع وتجهيز الفيديو...');
+
+            const reader = new FileReader();
+            reader.onload = function(event) {
+                tutorialVideoData = event.target.result;
+                try {
+                    localStorage.setItem('sela_tutorial_video_data', tutorialVideoData);
+                } catch (err) {
+                    // Video is larger than localStorage quota, keep in memory for immediate playback & export
+                }
+                renderTutorialVideo();
+                closeModal('video-modal');
+                showToast('تم رفع وتشغيل فيديو الشرح من جهازك بنجاح!');
+            };
+            reader.readAsDataURL(file);
+        }
+
+        // Initialize App (v4 with Complete 30 Games Catalog)
+        function init() {
+            const savedVideo = localStorage.getItem('sela_tutorial_video_data');
+            if (savedVideo) {
+                tutorialVideoData = savedVideo;
+            }
+            const savedGames = localStorage.getItem('sela_games_v4');
+            if (savedGames) {
+                try {
+                    games = JSON.parse(savedGames);
+                } catch (e) {
+                    games = [...defaultGames];
+                }
+            } else {
+                games = [...defaultGames];
+                saveGames();
+            }
+            renderTutorialVideo();
+            renderGames();
+            updateStats();
+        }
+
+        function saveGames() {
+            localStorage.setItem('sela_games_v4', JSON.stringify(games));
+            updateStats();
+        }
+
+        function updateStats() {
+            const countEl = document.getElementById('total-games-count');
+            const topBadge = document.getElementById('top-stats-badge');
+            const sizeEl = document.getElementById('total-size-count');
+            if (countEl) countEl.textContent = games.length;
+            if (topBadge) topBadge.textContent = `${games.length} لعبة متاحة`;
+
+            const totalGB = games.reduce((sum, g) => {
+                const val = Number(g.size) || 0;
+                return sum + (g.unit === 'MB' ? val / 1024 : val);
+            }, 0);
+            if (sizeEl) sizeEl.textContent = `${totalGB.toFixed(1)} GB`;
+
+            renderSidebarWidgets();
+        }
+
+        function renderSidebarWidgets() {
+            // Render Sidebar Categories with Counts
+            const catContainer = document.getElementById('sidebar-categories');
+            if (catContainer) {
+                const categories = ['أكشن وقتال', 'سباقات', 'رياضة وتعاوني', 'رعب وألغاز', 'محاكاة وإندي'];
+                catContainer.innerHTML = categories.map(cat => {
+                    const count = games.filter(g => g.genre === cat).length;
+                    const isActive = currentCategory === cat;
+                    return `
+                        <button onclick="setCategory('${cat}')" class="w-full px-4 py-2.5 flex items-center justify-between hover:bg-cyber-bg transition-colors cursor-pointer ${isActive ? 'text-sky-400 font-bold bg-cyber-bg/60' : 'text-slate-300'}">
+                            <span>${cat}</span>
+                            <span class="px-2 py-0.5 rounded bg-cyber-bg border border-cyber-border text-[11px] font-bold text-slate-400">${count}</span>
+                        </button>
+                    `;
+                }).join('');
+            }
+
+            // Render Top 5 Popular Games in Sidebar
+            const popContainer = document.getElementById('popular-games-list');
+            if (popContainer) {
+                const topGames = games.slice(0, 5);
+                popContainer.innerHTML = topGames.map(game => {
+                    return `
+                        <div onclick="openDownloadModal(${game.id})" class="flex items-center gap-3 p-1.5 rounded-lg hover:bg-cyber-bg transition-colors cursor-pointer group">
+                            <div class="w-12 h-14 rounded-lg overflow-hidden shrink-0 border border-cyber-border">
+                                ${getGameCoverHtml(game, false)}
+                            </div>
+                            <div class="min-w-0 flex-1">
+                                <h4 class="text-xs font-bold text-white group-hover:text-sky-400 transition-colors truncate" dir="ltr">${game.title}</h4>
+                                <div class="flex items-center gap-2 mt-1 text-[11px] text-slate-400">
+                                    <span>${game.genre}</span>
+                                    <span>•</span>
+                                    <span class="text-sky-400 font-bold" dir="ltr">${game.size} ${game.unit || 'GB'}</span>
+                                </div>
+                            </div>
+                        </div>
+                    `;
+                }).join('');
+            }
+
+            // Render Featured Top 4 Games
+            const featuredGrid = document.getElementById('featured-grid');
+            if (featuredGrid) {
+                const featuredGames = games.slice(0, 4);
+                featuredGrid.innerHTML = featuredGames.map(game => {
+                    return `
+                        <div onclick="openDownloadModal(${game.id})" class="relative h-48 rounded-xl overflow-hidden border border-cyber-border group cursor-pointer card-shadow">
+                            ${getGameCoverHtml(game, true)}
+                            <div class="absolute inset-0 featured-gradient"></div>
+                            <span class="absolute top-2.5 right-2.5 px-2 py-0.5 rounded bg-sky-500 text-white text-[10px] font-bold shadow">
+                                ${game.genre}
+                            </span>
+                            <span class="absolute top-2.5 left-2.5 px-2 py-0.5 rounded bg-black/75 text-white text-[10px] font-bold" dir="ltr">
+                                ${game.size} ${game.unit || 'GB'}
+                            </span>
+                            <div class="absolute bottom-3 right-3 left-3">
+                                <h3 class="text-sm font-black text-white group-hover:text-sky-400 transition-colors truncate" dir="ltr">${game.title}</h3>
+                                <p class="text-[11px] text-slate-300 truncate mt-0.5">اضغط للتحميل برابط مباشر</p>
+                            </div>
+                        </div>
+                    `;
+                }).join('');
+            }
+        }
+
+        function setCategory(cat) {
+            showHomeFeed();
+            currentCategory = cat;
+            const heading = document.getElementById('feed-heading');
+            if (heading) {
+                heading.textContent = cat === 'الكل' ? 'أحدث الألعاب المضافة للتحميل' : `قسم: ${cat}`;
+            }
+            document.querySelectorAll('.cat-btn').forEach(btn => {
+                if (btn.dataset.cat === cat) {
+                    btn.classList.add('active', 'bg-sky-500', 'text-white');
+                    btn.classList.remove('bg-cyber-bg', 'text-slate-300', 'border', 'border-cyber-border');
+                } else {
+                    btn.classList.remove('active', 'bg-sky-500', 'text-white');
+                    btn.classList.add('bg-cyber-bg', 'text-slate-300', 'border', 'border-cyber-border');
+                }
+            });
+            renderGames();
+            renderSidebarWidgets();
+        }
+
+        function filterGames() {
+            showHomeFeed();
+            renderGames();
+        }
+
+        function resetFilters() {
+            const searchInput = document.getElementById('searchInput');
+            if (searchInput) searchInput.value = '';
+            setCategory('الكل');
+        }
+
+        function resetDefaultGames() {
+            games = [...defaultGames];
+            saveGames();
+            resetFilters();
+            showToast('تمت استعادة القائمة الافتراضية (30 لعبة) بنجاح!');
+        }
+
+        function renderGames() {
+            const grid = document.getElementById('games-grid');
+            const emptyState = document.getElementById('empty-state');
+            const searchInput = document.getElementById('searchInput');
+            const searchQuery = searchInput ? searchInput.value.toLowerCase().trim() : '';
+
+            const filtered = games.filter(game => {
+                const matchesCat = currentCategory === 'الكل' || game.genre === currentCategory;
+                const matchesSearch = game.title.toLowerCase().includes(searchQuery) || 
+                                      game.folderName.toLowerCase().includes(searchQuery) ||
+                                      game.genre.toLowerCase().includes(searchQuery);
+                return matchesCat && matchesSearch;
+            });
+
+            grid.innerHTML = '';
+
+            if (filtered.length === 0) {
+                grid.classList.add('hidden');
+                emptyState.classList.remove('hidden');
+                return;
+            }
+
+            grid.classList.remove('hidden');
+            emptyState.classList.add('hidden');
+
+            filtered.forEach(game => {
+                const isCustomLinkSet = game.link && game.link !== 'https://www.mediafire.com/';
+
+                // Classic PC Game Download Site Horizontal Card UI
+                const card = document.createElement('article');
+                card.className = 'bg-cyber-card hover:bg-cyber-cardHover border border-cyber-border rounded-xl overflow-hidden flex flex-col sm:flex-row transition-all duration-200 group card-shadow hover:border-sky-500/40';
+                card.innerHTML = `
+                    <!-- Thumbnail on Right -->
+                    <div onclick="openDownloadModal(${game.id})" class="relative sm:w-56 h-48 sm:h-auto shrink-0 overflow-hidden bg-cyber-bg cursor-pointer">
+                        ${getGameCoverHtml(game, false)}
+                        <span class="absolute top-2.5 right-2.5 px-2.5 py-0.5 rounded bg-sky-500/95 text-white text-[11px] font-bold shadow">
+                            ${game.genre}
+                        </span>
+                    </div>
+
+                    <!-- Content & Download Action on Left -->
+                    <div class="p-4 sm:p-5 flex-1 flex flex-col justify-between">
+                        <div>
+                            <div class="flex items-start justify-between gap-2 mb-1.5">
+                                <h2 onclick="openDownloadModal(${game.id})" class="text-base sm:text-lg font-black text-white group-hover:text-sky-400 transition-colors cursor-pointer leading-snug" dir="ltr">
+                                    تحميل لعبة ${game.title} للكمبيوتر برابط مباشر
+                                </h2>
+                            </div>
+
+                            <!-- Metadata Row -->
+                            <div class="flex flex-wrap items-center gap-3 text-[11px] text-slate-400 mb-2.5">
+                                <span class="flex items-center gap-1 text-sky-400 font-bold" dir="ltr">
+                                    📦 ${game.size} ${game.unit || 'GB'}
+                                </span>
+                                <span>•</span>
+                                <span class="font-mono text-slate-300" dir="ltr">📁 ${game.folderName}</span>
+                                <span>•</span>
+                                <span class="${isCustomLinkSet ? 'text-emerald-400 font-bold' : 'text-amber-400'}">
+                                    ${isCustomLinkSet ? '● رابط MediaFire جاهز' : '● رابط افتراضي'}
+                                </span>
+                            </div>
+
+                            <!-- Short Excerpt -->
+                            <p class="text-xs text-slate-300 leading-relaxed line-clamp-2 mb-4">
+                                ${game.notes || 'تحميل لعبة ' + game.title + ' كاملة للكمبيوتر نسخة Steam النظيفة من ميديا فاير، انقل المجلد لمسار common واعمل Verify لتشغيل اللعبة فوراً.'}
+                            </p>
+                        </div>
+
+                        <!-- Bottom Action Footer -->
+                        <div class="flex items-center justify-between gap-2 pt-3 border-t border-cyber-border/70">
+                            <button onclick="openDownloadModal(${game.id})" class="px-4 py-2 rounded-lg bg-sky-500 hover:bg-sky-400 text-white font-bold text-xs flex items-center gap-1.5 transition-colors cursor-pointer shadow">
+                                <span>اقرأ المزيد والتحميل</span>
+                                <span>&larr;</span>
+                            </button>
+
+                            <div class="flex items-center gap-1.5">
+                                <button onclick="openEditLinkModal(${game.id})" title="تعديل الصورة والرابط والحجم" class="px-2.5 py-1.5 rounded-lg bg-cyber-bg hover:bg-slate-800 border border-cyber-border text-slate-300 hover:text-sky-400 text-xs font-semibold flex items-center gap-1 transition-colors cursor-pointer">
+                                    <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M11 5H6a2 2 0 00-2 2v11a2 2 0 002 2h11a2 2 0 002-2v-5m-1.414-9.414a2 2 0 112.828 2.828L11.828 15H9v-2.828l8.586-8.586z"></path>
+                                    </svg>
+                                    <span>تعديل</span>
+                                </button>
+                                <button onclick="deleteGame(${game.id})" title="حذف اللعبة" class="p-1.5 rounded-lg bg-cyber-bg hover:bg-red-950/50 border border-cyber-border text-slate-400 hover:text-red-400 transition-colors cursor-pointer">
+                                    <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16"></path>
+                                    </svg>
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                `;
+                grid.appendChild(card);
+            });
+        }
+
+        function readFileAsDataURL(file) {
+            return new Promise((resolve, reject) => {
+                const reader = new FileReader();
+                reader.onload = (event) => {
+                    const img = new Image();
+                    img.onload = () => {
+                        // Compress image to fit cleanly inside Google Sites Embed limit
+                        const canvas = document.createElement('canvas');
+                        const MAX_WIDTH = 420;
+                        const scale = MAX_WIDTH / img.width;
+                        canvas.width = MAX_WIDTH;
+                        canvas.height = img.height * scale;
+                        const ctx = canvas.getContext('2d');
+                        ctx.drawImage(img, 0, 0, canvas.width, canvas.height);
+                        resolve(canvas.toDataURL('image/jpeg', 0.75));
+                    };
+                    img.onerror = reject;
+                    img.src = event.target.result;
+                };
+                reader.onerror = reject;
+                reader.readAsDataURL(file);
+            });
+        }
+
+        // Export full HTML code with all user-uploaded images & links embedded permanently
+        function exportSiteCode() {
+            const currentDoc = document.documentElement.outerHTML;
+            const serializedGames = JSON.stringify(games);
+            const serializedVideo = JSON.stringify(tutorialVideoData || '');
+            const updatedDoc = currentDoc.replace(
+                /const defaultGames = \[[\s\S]*?\];/,
+                `const defaultGames = ${serializedGames};`
+            ).replace(
+                /let tutorialVideoData = '.*?';/,
+                `let tutorialVideoData = ${serializedVideo};`
+            ).replace(
+                /localStorage\.getItem\('sela_games_v4'\)/,
+                `null /* Baked for Google Sites */`
+            );
+            const finalHtml = `<!DOCTYPE html>\n${updatedDoc}`;
+            copyText(finalHtml, 'تم نسخ الكود النهائي بكل صورك وروابطك وفيديو الشرح! الصقه الآن في Google Sites');
+        }
+
+        async function handleAddGame(e) {
+            e.preventDefault();
+            const title = document.getElementById('new-title').value.trim();
+            const genre = document.getElementById('new-genre').value;
+            const size = parseFloat(document.getElementById('new-size').value);
+            const unit = document.getElementById('new-unit').value;
+            const folderName = document.getElementById('new-folder').value.trim();
+            const link = document.getElementById('new-link').value.trim();
+            const notes = document.getElementById('new-notes').value.trim();
+            const fileInput = document.getElementById('new-image-file');
+
+            let customImage = '';
+            if (fileInput.files && fileInput.files[0]) {
+                customImage = await readFileAsDataURL(fileInput.files[0]);
+            }
+
+            const newGame = {
+                id: Date.now(),
+                title,
+                genre,
+                size,
+                unit,
+                folderName,
+                link,
+                artType: 'nfs',
+                colors: ['#0f172a', '#1e3a8a', '#00f0ff'],
+                customImage,
+                notes: notes || 'تمت الإضافة بواسطة سليم وآسر.'
+            };
+
+            games.unshift(newGame);
+            saveGames();
+            renderGames();
+            document.getElementById('add-game-form').reset();
+            closeModal('add-game-modal');
+            showToast(`تمت إضافة "${title}" إلى المكتبة!`);
+        }
+
+        function deleteGame(id) {
+            const game = games.find(g => g.id === id);
+            if (!game) return;
+            games = games.filter(g => g.id !== id);
+            saveGames();
+            renderGames();
+            showToast(`تم حذف "${game.title}" من القائمة.`);
+        }
+
+        function openEditLinkModal(id) {
+            const game = games.find(g => g.id === id);
+            if (!game) return;
+            document.getElementById('edit-game-id').value = game.id;
+            document.getElementById('edit-link-title').textContent = `تعديل: ${game.title}`;
+            document.getElementById('edit-game-title').value = game.title;
+            document.getElementById('edit-game-url').value = game.link === 'https://www.mediafire.com/' ? '' : game.link;
+            document.getElementById('edit-game-size').value = game.size;
+            document.getElementById('edit-game-unit').value = game.unit || 'GB';
+            document.getElementById('edit-game-folder').value = game.folderName;
+            document.getElementById('edit-game-notes').value = game.notes || '';
+            document.getElementById('edit-game-image-file').value = '';
+            const modal = document.getElementById('edit-link-modal');
+            modal.classList.remove('hidden');
+            modal.classList.add('flex');
+        }
+
+        async function saveEditedLink(e) {
+            e.preventDefault();
+            const id = Number(document.getElementById('edit-game-id').value);
+            const title = document.getElementById('edit-game-title').value.trim();
+            const url = document.getElementById('edit-game-url').value.trim();
+            const size = parseFloat(document.getElementById('edit-game-size').value);
+            const unit = document.getElementById('edit-game-unit').value;
+            const folderName = document.getElementById('edit-game-folder').value.trim();
+            const notes = document.getElementById('edit-game-notes').value.trim();
+            const fileInput = document.getElementById('edit-game-image-file');
+
+            const gameIndex = games.findIndex(g => g.id === id);
+            if (gameIndex !== -1) {
+                games[gameIndex].title = title;
+                games[gameIndex].link = url;
+                games[gameIndex].size = size;
+                games[gameIndex].unit = unit;
+                games[gameIndex].folderName = folderName;
+                games[gameIndex].notes = notes;
+                if (fileInput.files && fileInput.files[0]) {
+                    games[gameIndex].customImage = await readFileAsDataURL(fileInput.files[0]);
+                }
+                saveGames();
+                renderGames();
+                showToast(`تم حفظ بيانات "${title}" بنجاح!`);
+            }
+            closeModal('edit-link-modal');
+        }
+
+        function showHomeFeed() {
+            const feedView = document.getElementById('home-feed-view');
+            const gamePage = document.getElementById('full-game-page');
+            const featuredSec = document.getElementById('featured-section');
+            if (feedView) feedView.classList.remove('hidden');
+            if (gamePage) gamePage.classList.add('hidden');
+            if (featuredSec) featuredSec.classList.remove('hidden');
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        }
+
+        function openDownloadModal(id) {
+            const game = games.find(g => g.id === id);
+            if (!game) return;
+            document.getElementById('dl-game-banner').innerHTML = getGameCoverHtml(game, true);
+            document.getElementById('dl-game-genre').textContent = game.genre;
+            document.getElementById('fp-breadcrumb-cat').textContent = game.genre;
+            document.getElementById('fp-breadcrumb-title').textContent = game.title;
+            document.getElementById('dl-game-title').textContent = `تحميل لعبة ${game.title} للكمبيوتر برابط مباشر`;
+            document.getElementById('fp-spec-name').textContent = game.title;
+            document.getElementById('dl-game-size').textContent = `${game.size} ${game.unit || 'GB'}`;
+            document.getElementById('dl-folder-name').textContent = game.folderName;
+            document.getElementById('dl-game-notes').textContent = game.notes || 'نسخة نظيفة ومحدثة بالكامل.';
+            document.getElementById('dl-mediafire-link').href = game.link || 'https://www.mediafire.com/';
+
+            // Switch full screen view instead of popup modal
+            const feedView = document.getElementById('home-feed-view');
+            const gamePage = document.getElementById('full-game-page');
+            const featuredSec = document.getElementById('featured-section');
+            if (feedView) feedView.classList.add('hidden');
+            if (featuredSec) featuredSec.classList.add('hidden');
+            if (gamePage) gamePage.classList.remove('hidden');
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        }
+
+        function openAddGameModal() {
+            const modal = document.getElementById('add-game-modal');
+            modal.classList.remove('hidden');
+            modal.classList.add('flex');
+        }
+
+        function openGuideModal() {
+            const modal = document.getElementById('guide-modal');
+            modal.classList.remove('hidden');
+            modal.classList.add('flex');
+        }
+
+        function closeModal(modalId) {
+            const modal = document.getElementById(modalId);
+            if (modal) {
+                modal.classList.add('hidden');
+                modal.classList.remove('flex');
+            }
+        }
+
+        function copyText(text, successMsg) {
+            const tempInput = document.createElement('input');
+            tempInput.value = text;
+            document.body.appendChild(tempInput);
+            tempInput.select();
+            document.execCommand('copy');
+            document.body.removeChild(tempInput);
+            showToast(successMsg);
+        }
+
+        function copySteamPath() {
+            copyText('C:\\Program Files (x86)\\Steam\\steamapps\\common', 'تم نسخ مسار Steam بنجاح!');
+        }
+
+        function copyTextById(elementId) {
+            const el = document.getElementById(elementId);
+            if (el) {
+                copyText(el.textContent.trim(), 'تم نسخ اسم المجلد بنجاح!');
+            }
+        }
+
+        function showToast(message) {
+            const container = document.getElementById('toast-container');
+            const toast = document.createElement('div');
+            toast.className = 'bg-cyber-card border border-cyber-cyan/60 text-white px-4 py-3 rounded-xl shadow-2xl text-xs font-bold flex items-center gap-2.5 pointer-events-auto transition-all duration-300';
+            toast.innerHTML = `
+                <span class="w-2 h-2 rounded-full bg-cyber-cyan shrink-0"></span>
+                <span>${message}</span>
+            `;
+            container.appendChild(toast);
+            setTimeout(() => {
+                toast.style.opacity = '0';
+                toast.style.transform = 'translateY(8px)';
+                setTimeout(() => toast.remove(), 300);
+            }, 3000);
+        }
+
+        // Start application on window load
+        window.onload = function() {
+            init();
+        };
+    </script>
+</body>
+</html>
